@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace SecretGermanJodelNet.Models.Jodel
 {
     public class Author
     {
         [JsonPropertyName("location")]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [JsonPropertyName("gender_id")]
         public int GenderId { get; set; }
@@ -31,6 +26,6 @@ namespace SecretGermanJodelNet.Models.Jodel
         public int UserAdminflag { get; set; }
 
         [JsonPropertyName("user_messages")]
-        public UserMessages UserMessages { get; set; }
+        public UserMessages? UserMessages { get; set; }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SecretGermanJodelNet.Exception
+﻿namespace SecretGermanJodelNet.Exception
 {
     public class JodelException : System.Exception
     {

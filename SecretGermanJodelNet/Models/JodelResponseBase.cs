@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace SecretGermanJodelNet.Models
 {
@@ -12,6 +7,6 @@ namespace SecretGermanJodelNet.Models
         [JsonPropertyName("status_id")]
         public int StatusId { get; set; }
         [JsonPropertyName("results")]
-        public T Result { get; set; }
+        public T? Result { get; set; }
     }
 }
