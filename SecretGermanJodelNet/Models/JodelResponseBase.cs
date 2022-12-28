@@ -2,7 +2,7 @@
 
 namespace SecretGermanJodelNet.Models
 {
-    public abstract class JodelResponseBase<T> where T : class
+    public record JodelResponseBase<T> where T : class
     {
         [JsonPropertyName("status_id")]
         public int StatusId { get; set; }

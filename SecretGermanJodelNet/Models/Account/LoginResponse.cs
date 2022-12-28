@@ -2,7 +2,7 @@
 
 namespace SecretGermanJodelNet.Models.Account
 {
-    public class LoginResponse
+    public record LoginResponse
     {
         [JsonPropertyName("token")]
         public string? Token { get; set; }

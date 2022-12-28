@@ -2,12 +2,12 @@
 
 namespace SecretGermanJodelNet.Models.Jodel
 {
-    public class View
+    public record View
     {
         [JsonPropertyName("main")]
         public int Main { get; set; }
 
         [JsonPropertyName("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

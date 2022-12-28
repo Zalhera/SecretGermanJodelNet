@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace SecretGermanJodelNet.Client
 {
-    public class JodelClient : IJodelClient
+    public sealed class JodelClient : IJodelClient
     {
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _handler;
@@ -25,19 +25,20 @@ namespace SecretGermanJodelNet.Client
             {
                 BaseAddress = new Uri(Routes.ApiBaseUrl),
             };
+            _httpClient.DefaultRequestHeaders.Add("Origin", "https://secretgermanjodel.com");
         }
 
-        private async Task<T?> PostAsync<T>(string url, HttpContent content)
+        private async Task<JodelResponseBase<T>?> PostAsync<T>(string url, HttpContent? content)
             where T : class
         {
             using (var response = await _httpClient.PostAsync(url, content))
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    return default(T);
+                    return default;
                 }
 
-                return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync());
+                return JsonSerializer.Deserialize<JodelResponseBase<T>>(await response.Content.ReadAsStringAsync());
             }
         }
 
@@ -47,6 +48,7 @@ namespace SecretGermanJodelNet.Client
             _handler?.Dispose();
         }
 
+        /// <inheritdoc/>
         public async Task<bool> LoginAsync(string username, string password)
         {
             var loginParameters = new Dictionary<string, string>()
@@ -56,16 +58,28 @@ namespace SecretGermanJodelNet.Client
             };
 
             var loginFormData = new FormUrlEncodedContent(loginParameters);
+            var loginResponse = await PostAsync<LoginResponse>(Routes.LoginRoute, loginFormData);
 
-            var loginResponse = await PostAsync<JodelResponseBase<LoginResponse>>(Routes.LoginRoute, loginFormData);
-
-            if(string.IsNullOrEmpty(loginResponse?.Result?.Token))
+            if (string.IsNullOrEmpty(loginResponse?.Result?.Token))
             {
-                throw new JodelException("Login was not successful", Routes.LoginRoute, loginParameters);
+                return false;
             }
 
-            _cookieContainer.Add(new Uri(Routes.BaseUrl), new Cookie(Parameters.Account.TokenCookieName, loginResponse.Result.Token));
+            SetSessionCookie(loginResponse.Result.Token);
             return true;
+        }
+
+        /// <inheritdoc/>
+        public void SetSessionCookie(string sessionCookie)
+        {
+            _cookieContainer.Add(new Uri(Routes.BaseUrl), new Cookie(Parameters.Account.TokenCookieName, sessionCookie));
+        }
+
+        /// <inheritdoc/>
+        public async Task<JodelResponseBase<AccountInfoResponse>?> GetAccountInfo(bool full = true)
+        {
+            var accountInfoFormData = full ? new FormUrlEncodedContent(new Dictionary<string, string>() { { Parameters.FullFormName, "1" } }) : null;
+            return await PostAsync<AccountInfoResponse>(Routes.InfoRoute, accountInfoFormData);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SecretGermanJodelNet.Models.Jodel
 {
-    public class Jodel
+    public record Jodel
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
@@ -23,16 +23,16 @@ namespace SecretGermanJodelNet.Models.Jodel
         public int Timestamp { get; set; }
 
         [JsonPropertyName("color")]
-        public Color? Color { get; set; }
+        public Color Color { get; set; } = default!;
 
         [JsonPropertyName("comments")]
         public int Comments { get; set; }
 
         [JsonPropertyName("votes")]
-        public Votes? Votes { get; set; }
+        public Votes Votes { get; set; } = default!;
 
         [JsonPropertyName("author")]
-        public Author? Author { get; set; }
+        public Author Author { get; set; } = default!;
 
         [JsonPropertyName("status")]
         public int Status { get; set; }

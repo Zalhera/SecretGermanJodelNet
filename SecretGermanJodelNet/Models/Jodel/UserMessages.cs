@@ -2,7 +2,7 @@
 
 namespace SecretGermanJodelNet.Models.Jodel
 {
-    public class UserMessages
+    public record UserMessages
     {
         [JsonPropertyName("all")]
         public int All { get; set; }

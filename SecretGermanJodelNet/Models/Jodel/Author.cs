@@ -2,7 +2,7 @@
 
 namespace SecretGermanJodelNet.Models.Jodel
 {
-    public class Author
+    public record Author
     {
         [JsonPropertyName("location")]
         public string? Location { get; set; }
@@ -26,6 +26,6 @@ namespace SecretGermanJodelNet.Models.Jodel
         public int UserAdminflag { get; set; }
 
         [JsonPropertyName("user_messages")]
-        public UserMessages? UserMessages { get; set; }
+        public UserMessages UserMessages { get; set; } = default!;
     }
 }
