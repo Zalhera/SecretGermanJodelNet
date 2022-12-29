@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SecretGermanJodelNet.Models.Account
+namespace SecretGermanJodelNet.Models
 {
     public record Entrycodes
     {

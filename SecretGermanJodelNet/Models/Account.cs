@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SecretGermanJodelNet.Models.Account
+namespace SecretGermanJodelNet.Models
 {
     public record Account
     {
@@ -22,7 +22,7 @@ namespace SecretGermanJodelNet.Models.Account
         [JsonPropertyName("notifications")]
         public Notifications Notifications { get; set; } = default!;
 
-        [JsonPropertyName("premium")] 
+        [JsonPropertyName("premium")]
         public Premium Premium { get; set; } = default!;
 
         [JsonPropertyName("donator")]

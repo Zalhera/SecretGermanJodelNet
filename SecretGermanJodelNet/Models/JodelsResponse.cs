@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SecretGermanJodelNet.Models.Jodel
+namespace SecretGermanJodelNet.Models
 {
-    public record JodelResponse
+    public record JodelsResponse
     {
         [JsonPropertyName("view")]
         public View View { get; set; } = default!;

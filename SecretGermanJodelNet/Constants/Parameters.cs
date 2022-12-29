@@ -26,5 +26,12 @@
 
         public const string FullFormName = "full";
         public const string OnceFormName = "once";
+
+        public const string VoteFormName = "vote";
+        public const string TypeFormName = "type";
+        public const string UserAuthorFormName = "user_author";
+        public const string UserAuthorCommentFormName = "user_author_comment";
+
+        public const string FavFormName = "fav";
     }
 }

@@ -9,14 +9,10 @@ namespace SecretGermanJodelNet.Converter
 
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            var timeStr = reader.GetString();
+            if (!reader.TryGetInt32(out var timestamp))
+                throw new FormatException("Unable to read timesteamp");
 
-            if (string.IsNullOrEmpty(timeStr) || !long.TryParse(timeStr, out var miliseconds))
-            {
-                throw new FormatException($"{timeStr} is not a correct unix Timestamp");
-            }
-
-            var dt = Epoch.AddMilliseconds(miliseconds);
+            var dt = Epoch.AddSeconds(timestamp);
             return dt;
         }
 
