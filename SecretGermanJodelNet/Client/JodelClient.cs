@@ -1,5 +1,4 @@
 ﻿using SecretGermanJodelNet.Constants;
-using SecretGermanJodelNet.Exception;
 using SecretGermanJodelNet.Models;
 using SecretGermanJodelNet.Models.Account;
 using System.Net;
